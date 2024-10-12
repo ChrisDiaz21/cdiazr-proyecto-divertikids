@@ -14,6 +14,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap" rel="stylesheet">
         <!-- SimpleLightbox plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         {% load static %}
         <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
@@ -35,6 +36,61 @@
                         <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="">Catálogo</a></li> -->
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Catálogo
+                              <span class="popup">
+                                <i class="fa-solid fa-screwdriver-wrench"></i> EN CONSTRUCCIÓN
+                              </span>
+                            </a>
+                          </li>
+                          
+                          <style>
+                            .nav-item {
+                              position: relative;
+                            }
+                          
+                            .popup {
+                              visibility: hidden;
+                              background-color: #333;
+                              color: #fff;
+                              text-align: center;
+                              padding: 5px;
+                              border-radius: 5px;
+                              position: absolute;
+                              z-index: 1;
+                              top: 125%; /* Ajusta según la posición deseada */
+                              left: 50%;
+                              transform: translateX(-50%);
+                              white-space: nowrap;
+                              font-size: 16px;
+                              opacity: 0;
+                              transition: opacity 0.3s;
+                            }
+                          
+                            .nav-item .popup::after {
+                              content: "";
+                              position: absolute;
+                              bottom: 100%; /* Flecha hacia abajo */
+                              left: 50%;
+                              margin-left: -5px;
+                              border-width: 5px;
+                              border-style: solid;
+                              border-color: #333 transparent transparent transparent;
+                            }
+                          
+                            .nav-item:hover .popup {
+                              visibility: visible;
+                              opacity: 1;
+                            }
+
+                            .popup i {
+                                margin-right: 5px; /* Espacio entre el icono y el texto */
+                            }
+                          </style> 
+
                         <li class="nav-item"><a class="nav-link" href="{% url 'log_in' %}">Iniciar Sesión</a></li>
                     </ul>
                 </div>
