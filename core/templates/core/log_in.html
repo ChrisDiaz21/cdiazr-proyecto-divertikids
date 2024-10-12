@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Divertikids</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>DIVERTIKIDS</h1>
+            <h2>Inicio de Sesión</h2>
+            <form method="POST">
+                <input type="email" name="email" placeholder="Ingrese su correo" required>
+                <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+                <button type="submit">Ingresar</button>
+                <p>¿No tienes cuenta? <a href="">Regístrate</a></p>
+                <a href="{% url 'home' %}">Volver a Home</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
