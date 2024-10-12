@@ -2846,10 +2846,10 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #f4623a;
+  --bs-btn-bg: #662086;
   --bs-btn-border-color: #f4623a;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #cf5331;
+  --bs-btn-hover-bg: #3b0455;
   --bs-btn-hover-border-color: #c34e2e;
   --bs-btn-focus-shadow-rgb: 246, 122, 88;
   --bs-btn-active-color: #fff;
@@ -10841,12 +10841,13 @@ body {
 
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75) !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .btn-xl {
   padding: 1.25rem 2.25rem;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.99rem;
+  font-weight: 500;
   text-transform: uppercase;
   border: none;
   border-radius: 10rem;
@@ -10856,7 +10857,7 @@ hr.divider {
   height: 0.2rem;
   max-width: 3.25rem;
   margin: 1.5rem auto;
-  background-color: #f4623a;
+  background-color: #662086;
   opacity: 1;
 }
 
@@ -10895,6 +10896,7 @@ hr.divider-light {
   }
   #mainNav .navbar-brand {
     color: rgba(255, 255, 255, 0.7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
   #mainNav .navbar-brand:hover {
     color: #fff;
@@ -10902,6 +10904,7 @@ hr.divider-light {
   #mainNav .navbar-nav .nav-item .nav-link {
     color: rgba(255, 255, 255, 0.7);
     padding: 0 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
   #mainNav .navbar-nav .nav-item .nav-link:hover {
     color: #fff;
@@ -10952,10 +10955,12 @@ header.masthead h1, header.masthead .h1 {
   header.masthead h1, header.masthead .h1 {
     font-size: 3rem;
   }
+
 }
 @media (min-width: 1200px) {
   header.masthead h1, header.masthead .h1 {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
 
