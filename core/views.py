@@ -5,3 +5,6 @@ def home(request):
 
 def log_in(request):
     return render(request, "core/log_in.html")
+
+def register(request):
+    return render(request, "core/register.html")
