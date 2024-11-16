@@ -47,6 +47,20 @@
             
         </div>
     </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirm_password");
+            if (password.type === "password") {
+                password.type = "text";
+                confirmPassword.type = "text";
+            } else {
+                password.type = "password";
+                confirmPassword.type = "password";
+            }
+        }
+    </script>
         
 </body>
 </html>
