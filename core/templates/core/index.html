@@ -99,8 +99,23 @@
                                 margin-right: 5px; /* Espacio entre el icono y el texto */
                             }
                         </style> 
-
-                        <li class="nav-item"><a class="nav-link" href="{% url 'log_in' %}">Iniciar Sesión</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="nav-link dropdown-item-user" href="{% url 'log_in' %}">
+                                        <i class="fa-solid fa-users"></i> Iniciar Sesión
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
+                                        <i class="fa-solid fa-user-plus"></i> Registrarse
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -327,6 +342,17 @@
                 background-repeat: no-repeat;
                 background-attachment: scroll;
                 background-size: cover;
+            }
+            .nav-link.dropdown-item-user {
+                color: black !important; 
+                background-color: transparent;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            .nav-link.dropdown-item-user:hover {
+                color: white !important;
+                background-color: #662086;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
             }
      </style>
         <!-- Bootstrap core JS-->
