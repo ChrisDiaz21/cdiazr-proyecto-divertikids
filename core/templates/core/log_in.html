@@ -19,7 +19,7 @@
                 <h2>Inicio de sesión</h2>
                 {% if messages %}
                     <div class="alert alert-danger">
-                        {% for message in messages %}
+                         {% for message in messages %} <!--esto me muestra que el email ingresado no existe en la bdd -->
                             <p>{{ message }}</p>
                         {% endfor %}
                     </div>
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="id_email">Correo Electrónico</label>
                         <input type="email" class="form-control" id="email" name="email" >
-                        {% if form.email.errors %}
+                        {% if form.email.errors %} <!-- me muestra si hay algun error con el email y si lo hay manda mensaje por pantalla -->
                             <div class="error-message">
                                 {% for error in form.email.errors %}
                                     <p>{{ error }}</p>
@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label for="id_password">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password">
-                        {% if form.password.errors %}
+                        {% if form.password.errors %} <!-- hace lo mismo que el error de email -->
                             <div class="error-message">
                                 {% for error in form.password.errors %}
                                     <p>{{ error }}</p>
@@ -62,6 +62,10 @@
         
                     <div class="form-group text-center mt-3">
                         <a href="{% url 'register' %}">¿No tienes cuenta? Regístrate</a>
+                    </div>
+                    
+                    <div class="form-group text-center mt-3">
+                        <a href="{% url 'password_reset' %}">¿Olvido su contraseña?</a>
                     </div>
         
                     <div class="form-group text-center">
