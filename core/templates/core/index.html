@@ -28,24 +28,16 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#page-top">Divertikids</a>
+                <a class="navbar-brand" href="{% url 'home' %}#page-top">Divertikids</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#range">Alcance</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Por definir</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#about">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#services">Alcance</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#portfolio">Por definir</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li>    
                         <!-- <li class="nav-item"><a class="nav-link" href="">Catálogo</a></li> -->
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                              Productos
-                              <span class="popup">
-                                <i class="fa-solid fa-screwdriver-wrench"></i> EN CONSTRUCCIÓN
-                              </span>
-                            </a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="#">
@@ -120,6 +112,7 @@
                 </div>
             </div>
         </nav>
+        {% block content %}
         <!-- Masthead-->
         <header class="masthead">
             <div class="container px-4 px-lg-5 h-100">
@@ -442,5 +435,6 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script src="{% static 'core/js/scripts.js' %}"></script>
+        {% endblock %}
     </body>
 </html>

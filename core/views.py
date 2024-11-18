@@ -37,3 +37,6 @@ def log_in(request):
 def register(request):
     return render(request, "core/register.html")
 
+def productos(request):
+    return render(request, "core/productos.html")
+
