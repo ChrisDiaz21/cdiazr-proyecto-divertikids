@@ -40,3 +40,5 @@ def register(request):
 def productos(request):
     return render(request, "core/productos.html")
 
+def carrito(request):
+    return render(request, "core/carrito.html")
