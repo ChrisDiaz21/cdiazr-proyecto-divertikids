@@ -71,23 +71,29 @@
     .section {
       margin: 20px 0;
     }
-    .product, .cart-item {
+    .product {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       margin: 10px 0;
       padding: 10px;
       background: #ffffff;
       border-radius: 8px;
     }
-    .cart-item {
+    .product-name {
+      flex: 2;
+      text-align: left;
+    }
+    .product-price {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+    }
+    .quantity-control {
+      flex: 2;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-      background: #f8f9fa;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 8px;
+      gap: 5px;
     }
     button {
       padding: 8px 15px;
@@ -96,27 +102,20 @@
       cursor: pointer;
       color: #fff;
     }
-    .remove-btn {
-      background-color: #dc3545;
-    }
-    .remove-btn:hover {
-      background-color: #c82333;
-    }
-    .quantity-control {
-      display: flex;
-      align-items: center;
-    }
     .quantity-control button {
       background-color: #007bff;
-      margin: 0 5px;
       padding: 5px 10px;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    .quantity-control span {
-      margin: 0 10px;
+    .remove-btn {
+      background-color: #dc3545;
+      padding: 5px 10px;
+    }
+    .remove-btn:hover {
+      background-color: #c82333;
     }
     .total-section {
       text-align: center;
@@ -127,115 +126,127 @@
     .total-section span {
       font-weight: bold;
     }
-    
-    .product-container, .cart-container {
+    .product-container {
       margin: 10px 0;
       background: #f8f9fa;
       padding: 15px;
       border-radius: 8px;
+    }
+    .buy-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .buy-btn:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Carrito de Compras</h2>
-
     
     <div class="section products product-container">
-      <h3>Productos</h3>
-      <div class="product">
-        <span>Producto 1</span>
-        <span>$10.00</span>
-        <button class="remove-btn" onclick="addToCart('Producto 1', 10)">Agregar al Carrito</button>
-      </div>
-      <div class="product">
-        <span>Producto 2</span>
-        <span>$15.00</span>
-        <button class="remove-btn" onclick="addToCart('Producto 2', 15)">Agregar al Carrito</button>
-      </div>
-      <div class="product">
-        <span>Producto 3</span>
-        <span>$20.00</span>
-        <button class="remove-btn" onclick="addToCart('Producto 3', 20)">Agregar al Carrito</button>
-      </div>
-    </div>
-
-    
-    <div class="section cart cart-container">
       <h3>Tu Carrito</h3>
-      <div id="cart-items">
-        
+      <div class="product">
+        <span class="product-name">Piscina de Pelotas</span>
+        <span class="product-price">$15.00</span>
+        <div class="quantity-control">
+          <button onclick="changeProductQuantity('Producto 1', -1)">-</button>
+          <span id="Producto 1-quantity">0</span>
+          <button onclick="changeProductQuantity('Producto 1', 1)">+</button>
+          <button class="remove-btn" onclick="removeProduct('Producto 1')">Eliminar</button>
+        </div>
+      </div>
+      <div class="product">
+        <span class="product-name">Producto 2</span>
+        <span class="product-price">19.99</span>
+        <div class="quantity-control">
+          <button onclick="changeProductQuantity('Producto 2', -1)">-</button>
+          <span id="Producto 2-quantity">0</span>
+          <button onclick="changeProductQuantity('Producto 2', 1)">+</button>
+          <button class="remove-btn" onclick="removeProduct('Producto 2')">Eliminar</button>
+        </div>
+      </div>
+      <div class="product">
+        <span class="product-name">Producto 3</span>
+        <span class="product-price">9.99</span>
+        <div class="quantity-control">
+          <button onclick="changeProductQuantity('Producto 3', -1)">-</button>
+          <span id="Producto 3-quantity">0</span>
+          <button onclick="changeProductQuantity('Producto 3', 1)">+</button>
+          <button class="remove-btn" onclick="removeProduct('Producto 3')">Eliminar</button>
+        </div>
       </div>
     </div>
 
-    
     <div class="total-section">
-      Total a Pagar: $<span id="total">0.00</span>
+      Total a Pagar: $<span id="total">0</span>
+      <button class="buy-btn" onclick="handleBuy()">Comprar</button>
     </div>
   </div>
 
   <script>
     const cart = [];
-    const cartItems = document.getElementById('cart-items');
     const totalDisplay = document.getElementById('total');
 
-    
-    function addToCart(name, price) {
-      const itemIndex = cart.findIndex(item => item.name === name);
-      if (itemIndex > -1) {
-        cart[itemIndex].quantity++;
+    function changeProductQuantity(name, amount) {
+      const priceMapping = { 'Producto 1': 15.00, 'Producto 2': 19.99, 'Producto 3': 9.99 };
+      const quantityElement = document.getElementById(`${name}-quantity`);
+      let quantity = parseInt(quantityElement.textContent) || 0;
+      quantity = Math.max(0, quantity + amount);
+      quantityElement.textContent = quantity;
+
+      if (quantity > 0) {
+        addToCart(name, priceMapping[name], quantity);
       } else {
-        cart.push({ name, price, quantity: 1 });
+        removeFromCart(name);
       }
-      updateCart();
     }
 
-    
+    function addToCart(name, price, quantity) {
+      const itemIndex = cart.findIndex(item => item.name === name);
+      if (itemIndex > -1) {
+        cart[itemIndex].quantity = quantity;
+      } else {
+        cart.push({ name, price, quantity });
+      }
+      updateTotal();
+    }
+
     function removeFromCart(name) {
       const itemIndex = cart.findIndex(item => item.name === name);
       if (itemIndex > -1) {
         cart.splice(itemIndex, 1);
-        updateCart();
+        updateTotal();
       }
+      document.getElementById(`${name}-quantity`).textContent = 0;
     }
 
-    
-    function changeQuantity(name, amount) {
-      const itemIndex = cart.findIndex(item => item.name === name);
-      if (itemIndex > -1) {
-        cart[itemIndex].quantity += amount;
-        if (cart[itemIndex].quantity <= 0) {
-          cart.splice(itemIndex, 1);
-        }
-        updateCart();
-      }
+    function removeProduct(name) {
+      removeFromCart(name);
     }
 
-    
-    function updateCart() {
-      cartItems.innerHTML = '';
+    function updateTotal() {
       let total = 0;
       cart.forEach(item => {
         total += item.price * item.quantity;
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-          <span>${item.name} (x${item.quantity})</span>
-          <span>$${(item.price * item.quantity).toFixed(2)}</span>
-          <div class="quantity-control">
-            <button onclick="changeQuantity('${item.name}', -1)">-</button>
-            <span>${item.quantity}</span>
-            <button onclick="changeQuantity('${item.name}', 1)">+</button>
-          </div>
-          <button class="remove-btn" onclick="removeFromCart('${item.name}')">Eliminar</button>
-        `;
-        cartItems.appendChild(cartItem);
       });
       totalDisplay.textContent = total.toFixed(2);
+    }
+
+    function handleBuy() {
+      alert('¡Gracias por tu compra! El total es $' + totalDisplay.textContent);
     }
   </script>
 </body>
 </html>
+
 
 {% endblock %}
 
