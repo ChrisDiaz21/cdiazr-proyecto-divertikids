@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from .forms import forms_login, CustomUserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-# from django.contrib.auth.decorators import login_required
-
 
 # Create your views here.
 def log_in(request):
@@ -29,9 +27,10 @@ def log_in(request):
             else:
                 messages.error(request, "Las credenciales son incorrectas o el usuario no existe.")
     else:
+        print(request.POST)
         form = forms_login()
         
-    return render(request, "login/log_in.html" , {'form': form})
+    return render(request, "registration/login.html" , {'form': form})
 
 def register(request):
     data={
@@ -42,9 +41,13 @@ def register(request):
         
         if User_Creation_form.is_valid():
             User_Creation_form.save()
-            return redirect('log_in')  # Redirige a la página de login después de registrar
+            return redirect('login')  # Redirige a la página de login después de registrar
 
     else:
         form = CustomUserCreationForm()
 
     return render(request, "registration/register.html",data)
+
+def exit (request):
+    logout(request)
+    return redirect('home')

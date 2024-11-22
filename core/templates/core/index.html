@@ -97,16 +97,32 @@
                                 <i class="fa-solid fa-circle-user"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li>
-                                    <a class="nav-link dropdown-item-user" href="{% url 'log_in' %}">
-                                        <i class="fa-solid fa-users"></i> Iniciar Sesión
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
-                                        <i class="fa-solid fa-user-plus"></i> Registrarse
-                                    </a>
-                                </li>
+
+                                {% if request.user.is_authenticated %}
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="{% url 'exit' %}">
+                                            <i class="fa-solid fa-users"></i> Salir
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="">
+                                            <i class="fa-solid fa-users"></i> {{user.username}}
+                                        </a>
+
+                                    </li>
+
+                                {% else %}
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="{% url 'login' %}">
+                                            <i class="fa-solid fa-users"></i> Iniciar Sesión
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
+                                            <i class="fa-solid fa-user-plus"></i> Registrarse
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>

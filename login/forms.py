@@ -11,9 +11,8 @@ class forms_login(forms.Form):
 
 
 class CustomUserCreationForm (UserCreationForm):
-    telefono = forms.CharField(max_length=15, required=True)
+    telefono = forms.CharField(max_length=15)
     fecha_nacimiento = forms.DateField(
-        required=True,
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         label="Fecha de Nacimiento"
     )
