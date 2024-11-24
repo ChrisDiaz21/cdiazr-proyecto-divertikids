@@ -27,24 +27,25 @@ def log_in(request):
             else:
                 messages.error(request, "Las credenciales son incorrectas o el usuario no existe.")
     else:
-        print(request.POST)
         form = forms_login()
         
     return render(request, "registration/login.html" , {'form': form})
 
 def register(request):
-    data={
-        'form':CustomUserCreationForm()
-    }
+    
     if request.method == 'POST':
-        User_Creation_form = CustomUserCreationForm(data=request.POST)
+        form = CustomUserCreationForm(data=request.POST)
         
-        if User_Creation_form.is_valid():
-            User_Creation_form.save()
+        if form.is_valid():
+            form.save()
             return redirect('login')  # Redirige a la página de login después de registrar
 
     else:
         form = CustomUserCreationForm()
+
+    data={
+        'form':form
+    }
 
     return render(request, "registration/register.html",data)
 

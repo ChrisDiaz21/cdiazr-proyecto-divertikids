@@ -10,8 +10,12 @@ class forms_login(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
 
 
-class CustomUserCreationForm (UserCreationForm):
-    telefono = forms.CharField(max_length=15)
+class CustomUserCreationForm (UserCreationForm):#todo esto es para el registro de usuarios
+    telefono = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Teléfono'}),
+        label="Teléfono"
+    )
     fecha_nacimiento = forms.DateField(
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         label="Fecha de Nacimiento"
@@ -21,13 +25,21 @@ class CustomUserCreationForm (UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email','telefono','fecha_nacimiento','password1', 'password2']
 
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de usuario'}), label="Nombre de usuario")
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre(s)'}), label="Nombre(s)")
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido(s)'}), label="Apellido(s)")
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo electrónico'}), label="Correo electrónico")
-    telefono = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Teléfono'}), label="Teléfono")
-    fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}), label="Fecha de Nacimiento")
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}), label="Contraseña")
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirmar contraseña'}), label="Confirmar contraseña")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name not in ['telefono', 'fecha_nacimiento']:
+                field.widget.attrs.update({'class': 'form-control'})
+                field.widget.attrs['placeholder'] = field.label
+
+        self.fields['first_name'].required = True#digo que los elementos sean obligatorios 
+        self.fields['last_name'].required = True
+        self.fields['email'].required = True
+
+    def clean_email(self):# esto valida que si el correo existe entonces no se podra registrar
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("El correo electrónico ya está registrado. Por favor, utiliza otro.")
+        return email
 
 
