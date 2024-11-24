@@ -141,6 +141,8 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 1em;
+      display: block;
+      margin-left: auto; /* Alinea el botón a la derecha */
     }
     .buy-btn:hover {
       background-color: #218838;
@@ -151,102 +153,111 @@
   <div class="container">
     <h2>Carrito de Compras</h2>
     
-    <div class="section products product-container">
+    <div class="section products product-container" id="product-container">
       <h3>Tu Carrito</h3>
-      <div class="product">
+      <div class="product" id="Producto-1">
         <span class="product-name">Piscina de Pelotas</span>
-        <span class="product-price">$15.00</span>
+        <span class="product-price">$15.000 CLP</span>
         <div class="quantity-control">
           <button onclick="changeProductQuantity('Producto 1', -1)">-</button>
-          <span id="Producto 1-quantity">0</span>
+          <span id="Producto 1-quantity">1</span>
           <button onclick="changeProductQuantity('Producto 1', 1)">+</button>
           <button class="remove-btn" onclick="removeProduct('Producto 1')">Eliminar</button>
         </div>
       </div>
-      <div class="product">
-        <span class="product-name">Producto 2</span>
-        <span class="product-price">19.99</span>
+      <div class="product" id="Producto-2">
+        <span class="product-name">Mini Montaña rusa</span>
+        <span class="product-price">$19.990 CLP</span>
         <div class="quantity-control">
           <button onclick="changeProductQuantity('Producto 2', -1)">-</button>
-          <span id="Producto 2-quantity">0</span>
+          <span id="Producto 2-quantity">1</span>
           <button onclick="changeProductQuantity('Producto 2', 1)">+</button>
           <button class="remove-btn" onclick="removeProduct('Producto 2')">Eliminar</button>
         </div>
       </div>
-      <div class="product">
-        <span class="product-name">Producto 3</span>
-        <span class="product-price">9.99</span>
+      <div class="product" id="Producto-3">
+        <span class="product-name">Tobogán Inflable</span>
+        <span class="product-price">$9.990 CLP</span>
         <div class="quantity-control">
           <button onclick="changeProductQuantity('Producto 3', -1)">-</button>
-          <span id="Producto 3-quantity">0</span>
+          <span id="Producto 3-quantity">1</span>
           <button onclick="changeProductQuantity('Producto 3', 1)">+</button>
           <button class="remove-btn" onclick="removeProduct('Producto 3')">Eliminar</button>
         </div>
       </div>
     </div>
+    
 
     <div class="total-section">
-      Total a Pagar: $<span id="total">0</span>
+      Total a Pagar: $<span id="total">0</span> CLP
       <button class="buy-btn" onclick="handleBuy()">Comprar</button>
     </div>
   </div>
 
   <script>
-    const cart = [];
-    const totalDisplay = document.getElementById('total');
+    const cart = [
+        { name: "Producto 1", price: 15000, quantity: 1 },
+        { name: "Producto 2", price: 19990, quantity: 1 },
+        { name: "Producto 3", price: 9990, quantity: 1 }
+    ];
+    const totalDisplay = document.getElementById("total");
 
     function changeProductQuantity(name, amount) {
-      const priceMapping = { 'Producto 1': 15.00, 'Producto 2': 19.99, 'Producto 3': 9.99 };
-      const quantityElement = document.getElementById(`${name}-quantity`);
-      let quantity = parseInt(quantityElement.textContent) || 0;
-      quantity = Math.max(0, quantity + amount);
-      quantityElement.textContent = quantity;
+        const priceMapping = { "Producto 1": 15000, "Producto 2": 19990, "Producto 3": 9990 };
+        const quantityElement = document.getElementById(`${name}-quantity`);
+        let quantity = parseInt(quantityElement.textContent) || 0;
+        quantity = Math.max(0, quantity + amount);
+        quantityElement.textContent = quantity;
 
-      if (quantity > 0) {
-        addToCart(name, priceMapping[name], quantity);
-      } else {
-        removeFromCart(name);
-      }
+        if (quantity > 0) {
+            addToCart(name, priceMapping[name], quantity);
+        } else {
+            removeProduct(name);
+        }
     }
 
     function addToCart(name, price, quantity) {
-      const itemIndex = cart.findIndex(item => item.name === name);
-      if (itemIndex > -1) {
-        cart[itemIndex].quantity = quantity;
-      } else {
-        cart.push({ name, price, quantity });
-      }
-      updateTotal();
+        const itemIndex = cart.findIndex(item => item.name === name);
+        if (itemIndex > -1) {
+            cart[itemIndex].quantity = quantity;
+        } else {
+            cart.push({ name, price, quantity });
+        }
+        updateTotal();
     }
 
     function removeFromCart(name) {
-      const itemIndex = cart.findIndex(item => item.name === name);
-      if (itemIndex > -1) {
-        cart.splice(itemIndex, 1);
-        updateTotal();
-      }
-      document.getElementById(`${name}-quantity`).textContent = 0;
+        const itemIndex = cart.findIndex(item => item.name === name);
+        if (itemIndex > -1) {
+            cart.splice(itemIndex, 1);
+            updateTotal();
+        }
     }
 
     function removeProduct(name) {
-      removeFromCart(name);
+        removeFromCart(name);
+        const productElement = document.getElementById(`Producto-${name.split(" ")[1]}`);
+        if (productElement) {
+            productElement.remove();
+        }
     }
 
     function updateTotal() {
-      let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.quantity;
-      });
-      totalDisplay.textContent = total.toFixed(2);
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+        });
+        totalDisplay.textContent = total.toFixed(2);
     }
 
     function handleBuy() {
-      alert('¡Gracias por tu compra! El total es $' + totalDisplay.textContent);
+        alert("¡Gracias por tu compra! El total es $" + totalDisplay.textContent + " CLP");
     }
-  </script>
+
+    updateTotal();
+</script>
+
 </body>
 </html>
 
-
 {% endblock %}
-
