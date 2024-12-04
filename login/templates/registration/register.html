@@ -113,21 +113,90 @@
                 {% endif %}
             </div>
 
+            
             <div class="form-group">
                 <input type="checkbox" id="mostrar_contrasena" onclick="togglePasswordVisibility()">
                 <label for="mostrar_contrasena">Mostrar Contraseña</label>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+           
+            <div class="form-group">
+                <input type="checkbox" id="accept_terms" name="accept_terms" disabled>
+                <label for="accept_terms">
+                    He leído y acepto los 
+                    <a href="#" onclick="showTerms()">términos y condiciones</a>.
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="registerBtn" disabled>Registrarse</button>
 
             <div class="form-group">
                 <a href="{% url 'login' %}">¿Ya tienes cuenta?</a>
             </div>
-
             <div class="form-group">
                 <a href="{% url 'home' %}">Volver a Home</a>
             </div>
         </form>
     </div>
 </div>
+
+<div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; max-width: 500px; width: 90%; border-radius: 10px; max-height: 80%; overflow-y: auto;">
+        <h5>Términos y Condiciones</h5>
+        <p>Términos y Condiciones de Uso</p>
+
+        <p>Última actualización: [04/12/2024]</p>
+
+        <p>Bienvenido a Divertikids, una plataforma dedicada a la renta de juegos inflables, colchonetas y otros productos de entretenimiento infantil. Al utilizar nuestros servicios, aceptas los siguientes términos y condiciones. Por favor, léelos detenidamente antes de realizar cualquier reservación.</p>
+
+        <ol>
+            <li><strong>Generalidades:</strong> Divertikids proporciona servicios de renta de juegos inflables y artículos relacionados con eventos infantiles. Estos términos son aplicables a todos los usuarios de la plataforma, incluidos aquellos que realicen reservas, consultas o cualquier interacción en nuestro sitio web. Nos reservamos el derecho de modificar estos términos en cualquier momento, notificando a los usuarios a través de nuestra plataforma.</li>
+
+            <li><strong>Reservaciones:</strong> Todas las reservas están sujetas a disponibilidad. El cliente debe proporcionar información completa y verídica al momento de realizar la solicitud. La reserva se considera confirmada únicamente tras recibir el pago correspondiente o un acuerdo específico entre las partes.</li>
+
+            <li><strong>Cancelaciones y Reembolsos:</strong> Las cancelaciones realizadas con al menos 72 horas de antelación tendrán derecho a un reembolso del 50% del monto pagado. Las cancelaciones realizadas con menos de 72 horas no son reembolsables. En caso de condiciones climáticas adversas, se puede reprogramar el evento sin costo adicional, sujeto a disponibilidad.</li>
+
+            <li><strong>Uso y Seguridad de los Juegos Inflables:</strong> Los juegos inflables deben ser utilizados bajo la supervisión de un adulto responsable. No se permite el uso de los juegos inflables por más personas de las recomendadas en las instrucciones. Está estrictamente prohibido: saltar con objetos punzantes o peligrosos, comer o beber dentro de los juegos inflables, y usarlos bajo condiciones climáticas adversas (lluvia o vientos fuertes). El cliente es responsable de cualquier daño causado por uso indebido de los equipos.</li>
+
+            <li><strong>Política de Entrega y Recogida:</strong> La entrega y recogida de los juegos inflables se realizará en la dirección indicada por el cliente. El cliente debe asegurarse de que haya suficiente espacio para la instalación y que la zona esté libre de objetos peligrosos. El horario de entrega y recogida será previamente acordado y deberá respetarse para evitar cargos adicionales.</li>
+
+            <li><strong>Responsabilidades del Cliente:</strong> El cliente es responsable de los equipos durante el tiempo de renta. Cualquier daño o pérdida será evaluado por nuestro equipo, y los costos de reparación o reposición serán asumidos por el cliente.</li>
+
+            <li><strong>Exclusión de Responsabilidad:</strong> Divertikids no será responsable por accidentes ocasionados por el uso indebido de los equipos, ni por daños a la propiedad del cliente durante la instalación o el uso de los equipos, salvo negligencia demostrada por parte de nuestro equipo.</li>
+
+            <li><strong>Privacidad y Protección de Datos:</strong> La información personal proporcionada por el cliente será utilizada exclusivamente para procesar reservas y comunicaciones relacionadas. No compartiremos tus datos con terceros sin tu consentimiento previo, salvo requerimientos legales.</li>
+
+            <li><strong>Jurisdicción y Ley Aplicable:</strong> Estos términos están sujetos a las leyes del país/región en el que operamos. Cualquier disputa se resolverá en los tribunales competentes de Concepcion.</li>
+        </ol>
+
+        <p>Si tienes alguna pregunta o inquietud, contáctanos a través de nuestro correo electrónico o número de atención al cliente. Al utilizar nuestros servicios, confirmas que has leído, comprendido y aceptado estos términos y condiciones.</p>
+
+        <p><strong>¡Gracias por confiar en Divertikids!</strong></p>
+
+        <button onclick="acceptTerms()" class="btn btn-primary">Aceptar</button>
+        <button onclick="closeTerms()" class="btn btn-secondary">Cerrar</button>
+    </div>
+</div>
+
+</div>
+
+<script>
+ 
+    function showTerms() {
+        document.getElementById('termsModal').style.display = 'flex';
+    }
+
+    
+    function closeTerms() {
+        document.getElementById('termsModal').style.display = 'none';
+    }
+
+   
+    function acceptTerms() {
+        document.getElementById('accept_terms').checked = true;
+        document.getElementById('accept_terms').disabled = false;
+        document.getElementById('registerBtn').disabled = false;
+        closeTerms();
+    }
+</script>
 {% endblock %}

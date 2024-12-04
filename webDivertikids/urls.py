@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', views_log.log_in, name='login'),
     path('accounts/login/', views_log.log_in, name='accounts_login'),
-    path('logout', views_log.exit, name='exit'),
+    path('logout/', views_log.exit, name='exit'),
 
 
     path('register/', views_log.register, name='register'),
