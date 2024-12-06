@@ -25,7 +25,7 @@ def log_in(request):
                     return redirect('/admin/')
                 return redirect('home')  # Redirige al home si es un usuario normal
             else:
-                messages.error(request, "Las credenciales son incorrectas o el usuario no existe.")
+                messages.error(request, "¡Ups! No pudimos encontrar una cuenta con ese correo electrónico o la contraseña ingresada es incorrecta. Por favor, verifica tus datos e inténtalo de nuevo.")
     else:
         form = forms_login()
         
