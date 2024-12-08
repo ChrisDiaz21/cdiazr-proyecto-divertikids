@@ -32,9 +32,9 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#services">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#range">Alcance</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#">Por definir</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#about">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#services">Alcance</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#portfolio">Por definir</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contacto</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li> 
                         <li class="nav-item"><a class="nav-link" href="{% url 'carrito' %}">Carrito</a></li>   
@@ -97,32 +97,16 @@
                                 <i class="fa-solid fa-circle-user"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-
-                                {% if request.user.is_authenticated %}
-                                    <li>
-                                        <a class="nav-link dropdown-item-user" href="{% url 'exit' %}">
-                                            <i class="fa-solid fa-users"></i> Salir
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link dropdown-item-user" href="">
-                                            <i class="fa-solid fa-users"></i> {{user.username}}
-                                        </a>
-
-                                    </li>
-
-                                {% else %}
-                                    <li>
-                                        <a class="nav-link dropdown-item-user" href="{% url 'login' %}">
-                                            <i class="fa-solid fa-users"></i> Iniciar Sesión
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
-                                            <i class="fa-solid fa-user-plus"></i> Registrarse
-                                        </a>
-                                    </li>
-                                {% endif %}
+                                <li>
+                                    <a class="nav-link dropdown-item-user" href="{% url 'log_in' %}">
+                                        <i class="fa-solid fa-users"></i> Iniciar Sesión
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
+                                        <i class="fa-solid fa-user-plus"></i> Registrarse
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -213,7 +197,7 @@
                 </div>
             </div>
         </div>
-        <!--Range -->
+        <!-- Services-->
         <section class="page-section" id="range">
             <div class="container px-4 px-lg-5">
                 <h2 class="text-center mt-0">At Your Service</h2>
@@ -274,78 +258,6 @@
                     <div class="col-lg-6">
                         <!-- * * * * * * * * * * * * * * *-->
                         <!-- * * SB Forms Contact Form * *-->
-                        <div class="form-container">
-                            <form action="https://formspree.io/f/xdkopkeb" method="POST">
-                              <h2>Contact Us</h2>
-                              
-                              <label for="email">Your email:</label>
-                              <input type="email" id="email" name="email" required placeholder="Enter your email">
-                              
-                              <label for="message">Your message:</label>
-                              <textarea id="message" name="message" rows="5" required placeholder="Type your message"></textarea>
-                              
-                              <button type="submit">Send</button>
-                            </form>
-                          </div>
-                          
-                          <style>
-                            .form-container {
-                              max-width: 400px;
-                              margin: 0 auto;
-                              padding: 20px;
-                              background-color: #ffffff;
-                              border-radius: 8px;
-                              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                            }
-                          
-                            .form-container h2 {
-                              font-size: 20px;
-                              margin-bottom: 15px;
-                              color: #333333;
-                              text-align: center;
-                            }
-                          
-                            .form-container label {
-                              display: block;
-                              margin-bottom: 8px;
-                              font-size: 14px;
-                              color: #555555;
-                            }
-                          
-                            .form-container input, 
-                            .form-container textarea {
-                              width: 100%;
-                              padding: 10px;
-                              margin-bottom: 15px;
-                              border: 1px solid #dddddd;
-                              border-radius: 4px;
-                              font-size: 14px;
-                            }
-                          
-                            .form-container input:focus, 
-                            .form-container textarea:focus {
-                              border-color: #007BFF;
-                              outline: none;
-                            }
-                          
-                            .form-container button {
-                              width: 100%;
-                              padding: 10px;
-                              background-color: #007BFF;
-                              color: #ffffff;
-                              border: none;
-                              border-radius: 4px;
-                              font-size: 16px;
-                              cursor: pointer;
-                              transition: background-color 0.3s ease;
-                            }
-                          
-                            .form-container button:hover {
-                              background-color: #0056b3;
-                            }
-                          </style>
-
-
                         <!-- * * * * * * * * * * * * * * *-->
                         <!-- This form is pre-integrated with SB Forms.-->
                         <!-- To make this form functional, sign up at-->
