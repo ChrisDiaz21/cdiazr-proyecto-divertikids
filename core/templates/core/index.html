@@ -98,7 +98,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 
-                                {% if request.user.is_authenticated %}
+                                {% if request.user.is_authenticated and not request.user.is_staff%}
                                     <li>
                                         <a class="nav-link dropdown-item-user" href="{% url 'exit' %}">
                                             <i class="fa-solid fa-users"></i> Salir
@@ -106,7 +106,7 @@
                                     </li>
                                     <li>
                                         <a class="nav-link dropdown-item-user" href="">
-                                            <i class="fa-solid fa-users"></i> {{user.username}}
+                                            <i class="fa-solid fa-users"></i> {{user.first_name}}
                                         </a>
 
                                     </li>
