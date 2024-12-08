@@ -1,8 +1,6 @@
-
-
 function togglePasswordVisibility() {
-    var password = document.getElementById("password");
-    var confirmPassword = document.getElementById("confirm_password");
+    var password = document.getElementById("id_password1");
+    var confirmPassword = document.getElementById("id_password2");
     var mostrarContrasena = document.getElementById("mostrar_contrasena");
 
     if (mostrarContrasena.checked) {

@@ -97,16 +97,32 @@
                                 <i class="fa-solid fa-circle-user"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li>
-                                    <a class="nav-link dropdown-item-user" href="{% url 'log_in' %}">
-                                        <i class="fa-solid fa-users"></i> Iniciar Sesión
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
-                                        <i class="fa-solid fa-user-plus"></i> Registrarse
-                                    </a>
-                                </li>
+
+                                {% if request.user.is_authenticated %}
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="{% url 'exit' %}">
+                                            <i class="fa-solid fa-users"></i> Salir
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="">
+                                            <i class="fa-solid fa-users"></i> {{user.username}}
+                                        </a>
+
+                                    </li>
+
+                                {% else %}
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="{% url 'login' %}">
+                                            <i class="fa-solid fa-users"></i> Iniciar Sesión
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link dropdown-item-user" href="{% url 'register' %}">
+                                            <i class="fa-solid fa-user-plus"></i> Registrarse
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
@@ -241,9 +257,6 @@
                 <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a>
             </div>
         </section>
-
-
-
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container px-4 px-lg-5">
@@ -263,21 +276,32 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form
-                        action="https://formspree.io/f/mbljkeye"
-                        method="POST"
->
-                    <label>
-                    Your email:
-                    <input type="email" name="email">
-                    </label>
-                    <label>
-                        Your message:
-                    <textarea name="message"></textarea>
-                    </label>
-<!-- your other form fields go here -->
-                    <button type="submit">Send</button>
-                    </form>
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <label for="name">Nombre completo</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">El nombre es requerido.</div>
+                            </div>
+                            <!-- Email address input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <label for="email">Email</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">El email es requerido.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">El email no es válido.</div>
+                            </div>
+                            <!-- Phone number input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                                <label for="phone">Número de telefono</label>
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">Número de telefono requerido.</div>
+                            </div>
+                            <!-- Message input-->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                                <label for="message">Mensaje</label>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">Escriba un mensaje.</div>
+                            </div>
                             <!-- Submit success message-->
                             <!---->
                             <!-- This is what your users will see when the form-->
@@ -320,9 +344,6 @@
             </div>
             
         </section>
-
-
-        
         <!-- Footer-->
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2024 - Divertikids</div></div>
