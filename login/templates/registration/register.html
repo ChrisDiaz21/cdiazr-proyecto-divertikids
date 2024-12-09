@@ -1,4 +1,4 @@
-{%extends 'login/base.html'%}
+{% extends 'login/base.html' %}
 
 {% block log %}
     <div class="login-container">
@@ -118,7 +118,16 @@
                     <label for="mostrar_contrasena">Mostrar Contraseña</label>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                <!-- Checkbox de términos y condiciones -->
+                <div class="form-group">
+                    <input type="checkbox" id="termsCheckbox">
+                    <label for="termsCheckbox">
+                        Acepto los <a href="#">términos y condiciones</a>
+                    </label>
+                </div>
+
+                <!-- Botón deshabilitado por defecto -->
+                <button type="submit" id="submitButton" class="btn btn-primary btn-block" disabled>Registrarse</button>
 
                 <div class="form-group">
                     <a href="{% url 'login' %}">¿Ya tienes cuenta?</a>
@@ -130,4 +139,21 @@
             </form>
         </div>
     </div>
+
+    <!-- Script para habilitar el botón -->
+    <script>
+        const checkbox = document.getElementById('termsCheckbox');
+        const button = document.getElementById('submitButton');
+
+        checkbox.addEventListener('change', () => {
+            button.disabled = !checkbox.checked;
+        });
+
+        function togglePasswordVisibility() {
+            const passwords = document.querySelectorAll('input[type="password"]');
+            passwords.forEach(input => {
+                input.type = input.type === 'password' ? 'text' : 'password';
+            });
+        }
+    </script>
 {% endblock %}
