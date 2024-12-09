@@ -135,3 +135,11 @@ header.masthead {
     margin-right: 8px; /* Espaciado entre el ícono y el texto */
     font-size: 1.2rem; /* Tamaño del ícono */
 }
+
+
+/* PRODUCTOS */
+
+.our_products {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
