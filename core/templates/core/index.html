@@ -32,8 +32,8 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#about">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#services">Alcance</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#range">Alcance</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#portfolio">Por definir</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contacto</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li> 
@@ -213,38 +213,61 @@
                 </div>
             </div>
         </div>
-        <!-- Services-->
+        <!-- Alcance-->
         <section class="page-section" id="range">
             <div class="container px-4 px-lg-5">
-                <h2 class="text-center mt-0">At Your Service</h2>
+                <h2 class="text-center mt-0">Nuestro alcance</h2>
                 <hr class="divider" />
-                <div class="row gx-4 gx-lg-5">
+                <div class="row gx-4 gx-lg-5" style="display: flex; justify-content: center; align-items: center;">
+                    <div style="text-align: center;">
+                        <img src="{% static 'core/assets/img/Provincia_Concepcion.png' %}" alt="" style="width: 30%; height: 30%;">
+                    </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Sturdy Themes</h3>
-                            <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+                            <ul class="h4 mb-2" style="text-align: left;">
+                                <li>
+                                    Concepción
+                                </li>
+                                <li>
+                                    San Pedro de la Paz
+                                </li>
+                                <li>
+                                    Talcahuano
+                                </li>
+                                <li>
+                                    Hualpén
+                                </li>
+                                <li>
+                                    Penco
+                                </li>
+                                <li>
+                                    Chiguayante
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="mt-5">
-                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Up to Date</h3>
-                            <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Ready to Publish</h3>
-                            <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Made with Love</h3>
-                            <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
+                            <ul class="h4 mb-2" style="text-align: left;">
+                                <li>
+                                    Coronel
+                                </li>
+                                <li>
+                                    Lota
+                                </li>
+                                <li>
+                                    Hualqui
+                                </li>
+                                <li>
+                                    Tomé
+                                </li>
+                                <li>
+                                    Florida
+                                </li>
+                                <li>
+                                    Santa Juana
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
