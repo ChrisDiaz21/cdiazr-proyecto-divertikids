@@ -1,0 +1,137 @@
+.nav-item {
+    position: relative;
+}
+
+.popup {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%; /* Ajusta según la posición deseada */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav-item .popup::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* Flecha hacia abajo */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.nav-item:hover .popup {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup i {
+    margin-right: 5px; /* Espacio entre el icono y el texto */
+}
+
+
+
+
+/* INDEX */
+
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: linear-gradient(to bottom, rgba(51, 47, 47, 0.2) 10%, rgba(51, 47, 47, 0.2) 100%), url('../assets/img/bg-masthead.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.nav-link.dropdown-item-user {
+    color: black !important; 
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link.dropdown-item-user:hover {
+    color: white !important;
+    background-color: #662086;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px;
+}
+
+
+
+.social-icons {
+    position: fixed;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* espacio entre los íconos */
+    z-index: 1000; /* asegura que esté por encima de otros elementos */
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    background-color: #3b5998; 
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2); /* Efecto de zoom al pasar el cursor */
+}
+
+.facebook {
+    background-color: #3b5998; 
+}
+
+.whatsapp {
+    background-color: #25D366;
+}
+
+.instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+
+
+.dropdown-menu {
+    width: 200px; /* Ancho del cuadro */
+    padding: 10px; /* Espaciado interno */
+}
+
+/* Asegurar que el hover ocupe todo el cuadro */
+.dropdown-item-user {
+    display: block; /* Ocupa todo el espacio del contenedor */
+    padding: 10px 15px; /* Ajusta el relleno */
+    text-align: left; /* Texto alineado a la izquierda */
+}
+
+/* Efecto iluminado al pasar el cursor */
+.dropdown-item-user:hover {
+    background-color: rgba(102, 32, 134, 0.9); /* Fondo morado con opacidad */
+    color: white; /* Letras blancas */
+    border-radius: 5px; /* Esquinas ligeramente redondeadas (opcional) */
+}
+
+/* Cambiar el tamaño del ícono dentro del dropdown */
+.dropdown-item-user i {
+    margin-right: 8px; /* Espaciado entre el ícono y el texto */
+    font-size: 1.2rem; /* Tamaño del ícono */
+}
