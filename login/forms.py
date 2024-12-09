@@ -49,7 +49,7 @@ class CustomUserCreationForm (UserCreationForm):#todo esto es para el registro d
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email','telefono','fecha_nacimiento','password1', 'password2']
+        fields = ['username', 'last_name', 'email','telefono','fecha_nacimiento','password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -58,11 +58,11 @@ class CustomUserCreationForm (UserCreationForm):#todo esto es para el registro d
                 field.widget.attrs.update({'class': 'form-control'})
                 field.widget.attrs['placeholder'] = field.label
 
-        self.fields['first_name'].required = True#digo que los elementos sean obligatorios 
+        self.fields['username'].required = True#digo que los elementos sean obligatorios 
         self.fields['last_name'].required = True
         self.fields['email'].required = True
 
-        self.fields['first_name'].validators.append(validar_longitud_minima)
+        self.fields['username'].validators.append(validar_longitud_minima)
         self.fields['last_name'].validators.append(validar_longitud_minima)
 
 

@@ -30,18 +30,6 @@
                 </div>
                 
                 <div class="form-group">
-                    {{ form.first_name.label_tag }}
-                    {{ form.first_name }}
-                    {% if form.first_name.errors %}
-                        <div class="text-danger">
-                            {% for error in form.first_name.errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-                
-                <div class="form-group">
                     {{ form.last_name.label_tag }}
                     {{ form.last_name }}
                     {% if form.last_name.errors %}
@@ -120,14 +108,12 @@
 
                 <!-- Checkbox de términos y condiciones -->
                 <div class="form-group">
-                    <input type="checkbox" id="termsCheckbox">
-                    <label for="termsCheckbox">
-                        Acepto los <a href="#">términos y condiciones</a>
-                    </label>
+                    <input type="checkbox" id="id_check" onclick="ButtonVisible()">
+                    <label for="termsCheckbox">Acepto los <a href="#">términos y condiciones</a> </label>
                 </div>
 
                 <!-- Botón deshabilitado por defecto -->
-                <button type="submit" id="submitButton" class="btn btn-primary btn-block" disabled>Registrarse</button>
+                <button type="submit" id="submitButton" class="btn btn-primary btn-block" disabled >Registrarse</button>
 
                 <div class="form-group">
                     <a href="{% url 'login' %}">¿Ya tienes cuenta?</a>
@@ -140,20 +126,5 @@
         </div>
     </div>
 
-    <!-- Script para habilitar el botón -->
-    <script>
-        const checkbox = document.getElementById('termsCheckbox');
-        const button = document.getElementById('submitButton');
 
-        checkbox.addEventListener('change', () => {
-            button.disabled = !checkbox.checked;
-        });
-
-        function togglePasswordVisibility() {
-            const passwords = document.querySelectorAll('input[type="password"]');
-            passwords.forEach(input => {
-                input.type = input.type === 'password' ? 'text' : 'password';
-            });
-        }
-    </script>
 {% endblock %}
