@@ -25,6 +25,8 @@
 
         <link rel="stylesheet" href="{% static 'core/js/scripts.js' %}">
         <link rel="stylesheet" href="{% static 'core/assets/img' %}">
+        {%block link%}
+        {%endblock%}
     </head>
     <body>
         <!-- Navigation-->
@@ -96,6 +98,7 @@
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2024 - Divertikids</div></div>
         </footer>
     </body>
+    <script src="{% static 'core/js/carrito.js' %}"></script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SimpleLightbox plugin JS-->
