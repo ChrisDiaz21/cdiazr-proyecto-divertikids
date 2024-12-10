@@ -20,7 +20,7 @@
             {% for n in productos %}
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="card h-100">
-                        <img class="card-img-top" src="{% static 'core/assets/img/productos/producto1.jpg' %}" alt="{{ n.title }}">
+                        <img class="card-img-top" src="{{n.imagen.url}}" alt="{{ n.title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{n.title}}</h5>
                             <p class="card-text">{{n.description}}</p>
@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <!-- Image -->
                                     <div class="col-md-6">
-                                        <img src="{% static 'core/assets/img/productos/producto1.jpg' %}" class="img-fluid rounded" alt="{{ n.title }}">
+                                        <img src="{{n.imagen.url}}" class="img-fluid rounded" alt="{{ n.title }}">
                                     </div>
                                     <!-- Text -->
                                     <div class="col-md-6">
