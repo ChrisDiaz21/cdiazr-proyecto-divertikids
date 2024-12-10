@@ -28,7 +28,6 @@
                         <div class="card-footer">
                             <!-- Aquí generamos un ID único para cada modal con un indice -->
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal{{ forloop.counter }}">Más Información</button>
-                            <button class="btn btn-success">Comprar</button>
                         </div>
                     </div>
                 </div>
@@ -53,16 +52,18 @@
                                         <p>
                                             <strong>Características:</strong>
                                             <ul>
-                                                <li>Se permite {{n.age}}</li>
+                                                <li>Se permite desde {{n.age_min}} hasta {{n.age_max}} años</li>
                                                 <li>${{n.price}} por unidad</li>
-                                                <li>Quedan {{n.stock}} unidades</li>
+                                                <li>Ancho {{n.width}} m</li>
+                                                <li>Largo {{n.height}} m</li>
+
                                             </ul>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-success">Comprar</button>
+                                <button class="btn btn-success">Agregar al carrito</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
