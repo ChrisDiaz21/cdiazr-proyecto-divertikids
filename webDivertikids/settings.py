@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core',
     'login',
     'games',
+    'notifications',
 ]
 
 MIDDLEWARE = [
