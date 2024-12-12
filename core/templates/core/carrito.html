@@ -8,58 +8,103 @@
 container
 {% block cont %}
 
-  <section class="page-section bg-light" id="productos">
-    <div class="container1 px-4 px-lg-5">
+<section class="page-section bg-light" id="productos">
+  <div class="container1 px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5">
+      <div class="container1">
+        <h2>Carrito de Compras</h2>
+        <hr class="divider" />
         
-        <div class="row gx-4 gx-lg-5">
-    <div class="container1">
-
-
-      <h2>Carrito de Compras</h2>
-      <hr class="divider" />
-      
-      <div class="section products product-container1">
-        <h3>Tu Carrito</h3>
-        <div class="product">
-          <span class="product-name">Piscina de Pelotas</span>
-          <span class="product-price">$15.00</span>
-          <div class="quantity-control">
-            <button onclick="changeProductQuantity('Producto 1', -1)">-</button>
-            <span id="Producto 1-quantity">0</span>
-            <button onclick="changeProductQuantity('Producto 1', 1)">+</button>
-            <button class="remove-btn" onclick="removeProduct('Producto 1')">Eliminar</button>
+        <div class="section products product-container1">
+          <h3>Tu Carrito</h3>
+          <div class="product" id="Producto 1">
+            <span class="product-name">Piscina de Pelotas</span>
+            <span class="product-price">CLP $15.000</span>
+            <div class="quantity-control">
+              <button onclick="changeProductQuantity('Producto 1', -1)">-</button>
+              <span id="Producto 1-quantity">1</span>
+              <button onclick="changeProductQuantity('Producto 1', 1)">+</button>
+              <button class="remove-btn" onclick="removeProduct('Producto 1')">Eliminar</button>
+            </div>
+          </div>
+          <div class="product" id="Producto 2">
+            <span class="product-name">Producto 2</span>
+            <span class="product-price">CLP $19.990</span>
+            <div class="quantity-control">
+              <button onclick="changeProductQuantity('Producto 2', -1)">-</button>
+              <span id="Producto 2-quantity">1</span>
+              <button onclick="changeProductQuantity('Producto 2', 1)">+</button>
+              <button class="remove-btn" onclick="removeProduct('Producto 2')">Eliminar</button>
+            </div>
+          </div>
+          <div class="product" id="Producto 3">
+            <span class="product-name">Producto 3</span>
+            <span class="product-price">CLP $9.990</span>
+            <div class="quantity-control">
+              <button onclick="changeProductQuantity('Producto 3', -1)">-</button>
+              <span id="Producto 3-quantity">1</span>
+              <button onclick="changeProductQuantity('Producto 3', 1)">+</button>
+              <button class="remove-btn" onclick="removeProduct('Producto 3')">Eliminar</button>
+            </div>
           </div>
         </div>
-        <div class="product">
-          <span class="product-name">Producto 2</span>
-          <span class="product-price">19.99</span>
-          <div class="quantity-control">
-            <button onclick="changeProductQuantity('Producto 2', -1)">-</button>
-            <span id="Producto 2-quantity">0</span>
-            <button onclick="changeProductQuantity('Producto 2', 1)">+</button>
-            <button class="remove-btn" onclick="removeProduct('Producto 2')">Eliminar</button>
-          </div>
-        </div>
-        <div class="product">
-          <span class="product-name">Producto 3</span>
-          <span class="product-price">9.99</span>
-          <div class="quantity-control">
-            <button onclick="changeProductQuantity('Producto 3', -1)">-</button>
-            <span id="Producto 3-quantity">0</span>
-            <button onclick="changeProductQuantity('Producto 3', 1)">+</button>
-            <button class="remove-btn" onclick="removeProduct('Producto 3')">Eliminar</button>
-          </div>
-        </div>
-      </div>
 
-      <div class="total-section">
-        Total a Pagar: $<span id="total">0</span>
-        <button class="buy-btn" onclick="handleBuy()">Comprar</button>
+        <div class="total-section">
+          Total a Pagar: CLP $<span id="total">45000</span>
+          <button class="buy-btn" id="buy-btn" onclick="handleBuy()">Comprar</button>
+        </div>
       </div>
     </div>
   </div>
-  </div>
 </section>
+
+<script>
+  let cart = {
+    "Producto 1": { quantity: 1, price: 15000 },
+    "Producto 2": { quantity: 1, price: 19990 },
+    "Producto 3": { quantity: 1, price: 9990 }
+  };
+
+  function changeProductQuantity(product, change) {
+    if (cart[product].quantity + change >= 0) {
+      cart[product].quantity += change;
+      document.getElementById(product + '-quantity').textContent = cart[product].quantity;
+      updateTotal();
+    }
+  }
+
+  function removeProduct(product) {
+    delete cart[product];
+    document.getElementById(product).remove();
+    updateTotal();
+    checkCartEmpty();
+  }
+
+  function updateTotal() {
+    let total = 0;
+    for (let product in cart) {
+      total += cart[product].quantity * cart[product].price;
+    }
+    document.getElementById('total').textContent = total;
+  }
+
+  function checkCartEmpty() {
+    if (Object.keys(cart).length === 0) {
+      document.getElementById('buy-btn').disabled = true;
+    } else {
+      document.getElementById('buy-btn').disabled = false;
+    }
+  }
+
+  function handleBuy() {
+    if (Object.keys(cart).length === 0) {
+      alert('No hay productos en el carrito para comprar.');
+    } else {
+      alert('Compra realizada exitosamente.');
+    }
+  }
+</script>
+
 
 {% endblock %}
 
