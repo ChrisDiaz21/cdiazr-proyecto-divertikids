@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ BASE_DIR / "static", ]
+# STATICFILES_DIRS = [ BASE_DIR / "static", ]
 LOGIN_URL = '/accounts/login/' #EL INICIO DE SESION POR DEFECTO ES ESTE 
 
 
@@ -150,7 +150,7 @@ JAZZMIN_SETTINGS = {
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "/core/assets/img/logo_blanco.png",
-    
+
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
 
