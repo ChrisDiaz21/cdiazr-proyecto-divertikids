@@ -123,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [ BASE_DIR / "static", ]
 LOGIN_URL = '/accounts/login/' #EL INICIO DE SESION POR DEFECTO ES ESTE 
 
 
@@ -139,17 +140,17 @@ LOGOUT_REDIRECT_URL = 'home'#por defecto despues de cerrar sesion me manda al ho
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Library Admin",
+    "site_title": "",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Library",
+    "site_header": "",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Library",
+    "site_brand": "",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "books/img/logo.png",
-
+    "site_logo": "/core/assets/img/logo_blanco.png",
+    
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
 
@@ -157,10 +158,10 @@ JAZZMIN_SETTINGS = {
     "login_logo_dark": None,
 
     # CSS classes that are applied to the logo above
-    "site_logo_classes": "img-circle",
+    "site_logo_classes": "/core/assets/img/logoDib-removebg-preview.png",
 
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
-    "site_icon": None,
+    "site_icon": "/core/assets/img/logoDib-removebg-preview.ico",
 
     # Welcome text on the login screen
     "welcome_sign": "Welcome to the library",
