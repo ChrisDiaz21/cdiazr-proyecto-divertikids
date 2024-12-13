@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+
+{% block cont %}
+<div class="container mt-5" style="margin-top: 120px;">
+    <h2 class="mb-4">Añadir Reseña</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Rating con estrellas y números -->
+        <div class="mb-4">
+            <label class="form-label">Rating:</label>
+            <div class="rating">
+                <input type="radio" name="rating" value="5" id="star5"><label for="star5"><i class="fa-solid fa-star"></i> 5</label>
+                <input type="radio" name="rating" value="4" id="star4"><label for="star4"><i class="fa-solid fa-star"></i> 4</label>
+                <input type="radio" name="rating" value="3" id="star3"><label for="star3"><i class="fa-solid fa-star"></i> 3</label>
+                <input type="radio" name="rating" value="2" id="star2"><label for="star2"><i class="fa-solid fa-star"></i> 2</label>
+                <input type="radio" name="rating" value="1" id="star1"><label for="star1"><i class="fa-solid fa-star"></i> 1</label>
+            </div>
+        </div>
+
+        <!-- Campo para el comentario -->
+        <div class="mb-4">
+            <label class="form-label">Comentario:</label>
+            <textarea class="form-control" name="comment" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+    </form>
+
+    <!-- Listado de Reseñas Existentes -->
+    <div class="mt-5">
+        <h2>Reseñas Existentes</h2>
+        
+            <div class="review mb-4">
+                <p><strong>{{ review.user.username }}</strong> - {{ review.created_at|date:"d M Y H:i" }}</p>
+                <p>Calificación: {{ review.rating }} estrellas</p>
+                <p>{{ review.comment }}</p>
+            </div>
+        
+            <p>No hay reseñas disponibles.</p>
+        
+    </div>
+</div>
+
+<!-- Estilos CSS Integrados -->
+<style>
+    .rating {
+        direction: rtl;
+        unicode-bidi: bidi-override;
+        display: flex;
+        gap: 15px;
+    }
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        cursor: pointer;
+        font-size: 2rem;
+        color: #ddd;
+        transition: color 0.3s, transform 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+        color: #f5b301;
+        transform: scale(1.1);
+    }
+
+    .rating label i {
+        margin-right: 5px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .btn-primary {
+        background-color: #9c27b0;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #7b1fa2;
+    }
+
+    .review {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+</style>
+{% endblock %}
