@@ -81,11 +81,17 @@ WSGI_APPLICATION = 'webDivertikids.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'divertikids',  # Nombre de tu base de datos
+        'USER': 'gerald',  # Usuario de la base de datos
+        'PASSWORD': 'MatematicA22.',  # Contraseña de la base de datos
+        'HOST': 'conexionbdd.writer.postgres.database.azure.com',  # Dirección del servidor de la base de datos (puede ser una IP o 'localhost')
+        'PORT': '5432',  # Puerto por defecto de PostgreSQL
+        # 'OPTIONS': {
+        #     'sslmode': 'require',  # Esto obliga a usar una conexión SSL
+        # },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

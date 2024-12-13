@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render,redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
 from .models import Review
