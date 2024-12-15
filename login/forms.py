@@ -1,55 +1,66 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from .models import MyUser  # Importa tu modelo de usuario personalizado
 from django.core.exceptions import ValidationError
 from datetime import date
 import re
 
-def validar_edad(fecha_nacimiento):#valida que se ingrese una fecha de nacimiento valida
+
+############ validaciones ############
+def validar_edad(fecha_nacimiento):
     today = date.today()
     edad = today.year - fecha_nacimiento.year - ((today.month, today.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
     
     if edad < 18:
-        raise ValidationError("Ingrese una fecha correspondiente.")
-    elif edad >110:
-        raise ValidationError("Ingrese una fecha correspondiente.")
+        raise ValidationError("Debe ser mayor de 18 años.")
+    elif edad > 110:
+        raise ValidationError("Ingrese una fecha válida.")
     
-def validar_longitud_minima(value):#valida si el nombre u apellido tiene los caractares minimos que son 4
+def validar_longitud_minima(value):
     if len(value) < 4:
         raise ValidationError('Este campo debe tener al menos 4 caracteres.')
+    if not value.isalpha():
+        raise ValidationError('Este campo solo puede contener letras.')
     
-def validar_telefono(value):#valida que solo ingrese valores numericos y que el largo sea 9
+def validar_telefono(value):
     if not re.match(r'^\d{9}$', value):
         raise ValidationError("El número de teléfono debe contener solo 9 dígitos numéricos.")
+    
+def validar_rut(value):
+    rut_pattern = re.compile(r'^\d{1,8}-[\dkK]$')
+    if not rut_pattern.match(value):
+        raise ValidationError("El RUT ingresado es incorrecto")
+    
 
-
-
-
-
+################## los datos que se piden para iniciar sesion ########################
 class forms_login(forms.Form):
-    # esto es para cuando inicie sesion lo pueda hacer por el correo y no el nombre de ususario que esta por defecto
     email = forms.EmailField(label="Correo electrónico")
     password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
 
 
 
-class CustomUserCreationForm (UserCreationForm):#todo esto es para el registro de usuarios
+################### los datos que se guardaran del ususario ###########################
+class CustomUserCreationForm(UserCreationForm):
     telefono = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Teléfono'}),
         label="Teléfono",
         validators=[validar_telefono]
     )
 
-
     fecha_nacimiento = forms.DateField(
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         label="Fecha de Nacimiento",
         validators=[validar_edad]
     )
+    rut = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'RUT'}),
+        label="RUT",
+        validators=[validar_rut]
+    )
 
     class Meta:
-        model = User
-        fields = ['username', 'last_name', 'email','telefono','fecha_nacimiento','password1', 'password2']
+        model = MyUser
+        fields = ['rut', 'first_name', 'last_name', 'email', 'telefono', 'fecha_nacimiento', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -58,19 +69,17 @@ class CustomUserCreationForm (UserCreationForm):#todo esto es para el registro d
                 field.widget.attrs.update({'class': 'form-control'})
                 field.widget.attrs['placeholder'] = field.label
 
-        self.fields['username'].required = True#digo que los elementos sean obligatorios 
+        self.fields['rut'].required = True
+        self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
 
-        self.fields['username'].validators.append(validar_longitud_minima)
+        self.fields['first_name'].validators.append(validar_longitud_minima)
         self.fields['last_name'].validators.append(validar_longitud_minima)
 
-
-    def clean_email(self):# esto valida que si el correo existe entonces no se podra registrar
+    def clean_email(self):
         email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
+        if MyUser.objects.filter(email=email).exists():
             raise forms.ValidationError("El correo electrónico ya está registrado. Por favor, utiliza otro.")
         return email
-    
-
 

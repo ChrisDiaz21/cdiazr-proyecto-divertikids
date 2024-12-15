@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth import login,logout
+from django.contrib.auth import login, logout
 from .forms import forms_login, CustomUserCreationForm
-from django.contrib.auth.models import User
+from .models import MyUser  # Importa tu modelo de usuario personalizado
 from django.contrib import messages
 
 # Create your views here.
@@ -14,8 +13,8 @@ def log_in(request):
             password = form.cleaned_data['password']
 
             try:
-                user = User.objects.get(email=email)  # Encuentra el usuario por email
-            except User.DoesNotExist:
+                user = MyUser.objects.get(email=email)  # Encuentra el usuario por email
+            except MyUser.DoesNotExist:
                 user = None
 
             if user is not None and user.check_password(password):  # Verifica la contraseña
@@ -29,26 +28,25 @@ def log_in(request):
     else:
         form = forms_login()
         
-    return render(request, "registration/login.html" , {'form': form})
+    return render(request, "registration/login.html", {'form': form})
 
 def register(request):
-
     if request.method == 'POST':
         form = CustomUserCreationForm(data=request.POST)
-        
         if form.is_valid():
-            form.save()
-            return redirect('login')  # Redirige a la página de login después de registrar
-
+            user = form.save(commit=False)
+            user.username = user.rut  # Asegúrate de que el campo username se llene con el RUT
+            user.save()
+            return redirect('login')
     else:
         form = CustomUserCreationForm()
        
-    data={
-        'form':form
+    data = {
+        'form': form
     }
 
-    return render(request, "registration/register.html",data)
+    return render(request, "registration/register.html", data)
 
-def exit (request):
+def exit(request):
     logout(request)
     return redirect('home')

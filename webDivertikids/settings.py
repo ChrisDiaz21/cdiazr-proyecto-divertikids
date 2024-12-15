@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from pathlib import Path
 import os 
 
@@ -31,6 +30,9 @@ ALLOWED_HOSTS = []
 SESSION_ENGINE='django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 1800
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+AUTH_USER_MODEL = 'login.MyUser'
+
 
 
 # Application definition
@@ -83,17 +85,16 @@ WSGI_APPLICATION = 'webDivertikids.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'divertikids',  # Nombre de tu base de datos
-        'USER': 'gerald',  # Usuario de la base de datos
-        'PASSWORD': 'MatematicA22.',  # Contraseña de la base de datos
-        'HOST': 'conexionbdd.writer.postgres.database.azure.com',  # Dirección del servidor de la base de datos (puede ser una IP o 'localhost')
-        'PORT': '5432',  # Puerto por defecto de PostgreSQL
-        # 'OPTIONS': {
-        #     'sslmode': 'require',  # Esto obliga a usar una conexión SSL
-        # },
+        'NAME': 'divertikids',
+        'USER': 'gerald',
+        'PASSWORD': 'MatematicA22.',
+        'HOST': 'conexionbdd.writer.postgres.database.azure.com',
+        'PORT': '5432',
     }
 }
 

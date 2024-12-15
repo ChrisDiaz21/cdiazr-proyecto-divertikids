@@ -1,4 +1,8 @@
 {% extends 'core/base.html' %}
+{% block link %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/styles_rewie.css' %}">
+{% endblock %}
 
 {% block cont %}
 <div class="container mt-5" style="margin-top: 120px;">
@@ -32,7 +36,7 @@
         <h2>Reseñas Existentes</h2>
         
             <div class="review mb-4">
-                <p><strong>{{ review.user.username }}</strong> - {{ review.created_at|date:"d M Y H:i" }}</p>
+                <p><strong>{{ review.user.first_name }}</strong> - {{ review.created_at|date:"d M Y H:i" }}</p>
                 <p>Calificación: {{ review.rating }} estrellas</p>
                 <p>{{ review.comment }}</p>
             </div>
@@ -41,61 +45,4 @@
         
     </div>
 </div>
-
-<!-- Estilos CSS Integrados -->
-<style>
-    .rating {
-        direction: rtl;
-        unicode-bidi: bidi-override;
-        display: flex;
-        gap: 15px;
-    }
-
-    .rating input {
-        display: none;
-    }
-
-    .rating label {
-        cursor: pointer;
-        font-size: 2rem;
-        color: #ddd;
-        transition: color 0.3s, transform 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .rating input:checked ~ label,
-    .rating label:hover,
-    .rating label:hover ~ label {
-        color: #f5b301;
-        transform: scale(1.1);
-    }
-
-    .rating label i {
-        margin-right: 5px;
-    }
-
-    .form-label {
-        font-weight: bold;
-    }
-
-    textarea {
-        resize: none;
-    }
-
-    .btn-primary {
-        background-color: #9c27b0;
-        border: none;
-    }
-
-    .btn-primary:hover {
-        background-color: #7b1fa2;
-    }
-
-    .review {
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-    }
-</style>
 {% endblock %}
