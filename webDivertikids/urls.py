@@ -29,6 +29,7 @@ urlpatterns = [
 
     #Reseñas
     path('add-review/', views.add_review, name='add_review'),
+    path('public-reviews/', views.public_reviews, name='public_reviews'),
 
 
 ]

@@ -46,11 +46,17 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                         </a></li>
                         
+                        <!-- Reseñas sin inicios de sesion-->
+
+                        <li class="nav-item"><a class="nav-link" href="{% url 'public_reviews' %}">Reseñas </a></li>
+
+
+                        <!-- Reseñas con inicios de sesion-->
                         
                         {% if request.user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'add_review' %}">
-                                    <i class="fa-solid fa-star"></i>  Reseñas
+                                    <i class="fa-solid fa-star"></i>  Crear Reseñas 
                                 </a>
                             </li>
                         {% endif %}

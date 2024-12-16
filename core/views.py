@@ -37,3 +37,8 @@ def reviews(request):
 def review_list(request):
     reviews = Review.objects.all().order_by('-created_at')
     return render(request, 'core/review_list.html', {'reviews': reviews})
+
+
+def public_reviews(request):
+    reviews = Review.objects.all().order_by('-created_at')
+    return render(request, 'core/public_reviews.html', {'reviews': reviews})
