@@ -6,3 +6,7 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.message} - {self.created_at}"
+            
+    class Meta: 
+        verbose_name = "Notificación" 
+        verbose_name_plural = "Notificaciones"

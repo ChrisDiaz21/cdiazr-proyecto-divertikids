@@ -5,3 +5,5 @@ from .models import Notification
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ('message', 'created_at')
     ordering = ('-created_at',)
+
+
