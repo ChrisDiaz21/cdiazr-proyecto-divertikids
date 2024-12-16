@@ -22,4 +22,9 @@ class MyUserAdmin(UserAdmin):
     search_fields = ('rut', 'email', 'first_name', 'last_name')
     ordering = ('rut',)
 
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
+    get_full_name.short_description = 'Nombre Completo'
+
+
 admin.site.register(MyUser, MyUserAdmin)
