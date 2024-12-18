@@ -1,0 +1,10 @@
+asgiref @ file:///C:/b/abs_ae1n0p_8_w/croot/asgiref_1724072476516/work
+Django==5.1.4
+django-jazzmin==3.0.1
+pillow @ file:///C:/b/abs_2cm0qc1vxk/croot/pillow_1731594717982/work
+psycopg2-binary==2.9.10
+python-decouple==3.8
+setuptools==75.1.0
+sqlparse @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/sqlparse_1699544474746/work
+tzdata @ file:///croot/python-tzdata_1690578112552/work
+wheel==0.44.0
