@@ -1,18 +1,21 @@
 {% extends 'core/base.html' %}
-
 {% block cont %}
-<div class="container mt-5" style="margin-top: 120px;">
-    <h2 class="mb-4">Reseñas de Nuestros Usuarios</h2>
-    {% if reviews %}
-        {% for review in reviews %}
-            <div class="review mb-4 p-3 border rounded">
-                <p><strong>{{ review.user.first_name }}</strong> - {{ review.created_at|date:"d M Y H:i" }}</p>
-                <p>Calificación: {{ review.rating }} estrellas</p>
-                <p>{{ review.comment }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No hay reseñas disponibles.</p>
-    {% endif %}
-</div>
+    <div class="container mt-5" style="margin-top: 120px;">
+        <h2 class="mb-4">Reseñas de Nuestros Usuarios</h2>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review mb-4 p-3 border rounded">
+                    <p><strong>{{ review.user.first_name }}</strong> - {{ review.created_at|date:"d M Y H:i" }}</p>
+                    <p>Calificación: {{ review.rating }} estrellas</p>
+                    <p>{{ review.comment }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay reseñas disponibles.</p>
+        {% endif %}
+    </div>
 {% endblock %}
+
+
+
+

@@ -6,7 +6,6 @@ from games import views as views_game
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns 
-from core import views
 
 urlpatterns = [
     path('', views_cor.home, name='home'),
@@ -28,8 +27,8 @@ urlpatterns = [
 
 
     #Reseñas
-    path('add-review/', views.add_review, name='add_review'),
-    path('public-reviews/', views.public_reviews, name='public_reviews'),
+    path('add-review/', views_cor.add_review, name='add_review'),
+    path('public-reviews/', views_cor.public_reviews, name='public_reviews'),
 
 
 ]
