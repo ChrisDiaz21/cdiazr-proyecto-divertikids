@@ -11,10 +11,6 @@ def carrito(request):
     # Lógica para el carrito
     return render(request, 'core/carrito.html')  # Asegúrate de que la ruta sea correcta
 
-
-
-
-
 @login_required
 def add_review(request):
     if request.method == 'POST':

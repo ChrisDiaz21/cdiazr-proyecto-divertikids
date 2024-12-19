@@ -20,12 +20,28 @@
 
                 <div class="total-section">
                     Total a Pagar: CLP $<span id="total">0</span>
-                    <button class="buy-btn" id="buy-btn" onclick="handleBuy()">Comprar</button>
+                    <button class="buy-btn" id="buy-btn" onclick="handleBuy()">Continuar</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<div id="calendar-popup" class="calendar-popup">
+  <div class="calendar-popup-content">
+      <span class="close-button" onclick="closePopup()">&times;</span>
+      <input type="date" id="reservation-date" name="reservation-date" required>
+      <div>
+          <input type="radio" id="morning" name="time" value="Mañana">
+          <label for="morning">Mañana (9:00 - 14:00)</label>
+          <input type="radio" id="afternoon" name="time" value="Tarde">
+          <label for="afternoon">Tarde (12:00 - 18:00)</label>
+      </div>
+      <button class="buy-btn" onclick="continueReservation()">Solicitar Reserva</button>
+  </div>
+</div>
+
+
 
 <script>
 // Leer los parámetros de la URL
@@ -120,9 +136,9 @@ function renderCart() {
 // Función para realizar la compra (puedes personalizar según el backend)
 function handleBuy() {
   if (Object.keys(cart).length === 0) {
-    alert('No hay productos en el carrito para comprar.');
+    alert('No hay productos en el carrito para solicitar.');
   } else {
-    alert('Compra realizada exitosamente.');
+    alert('Solcitud enviada exitosamente.');
     // Limpiar el carrito después de realizar la compra
     localStorage.removeItem('cart');
     renderCart();  // Volver a renderizar el carrito vacío
@@ -132,5 +148,122 @@ function handleBuy() {
 // Iniciar renderizado del carrito al cargar la página
 renderCart();
 </script>
+
+<script>
+  function handleBuy() {
+      if (Object.keys(cart).length === 0) {
+          alert('No hay productos en el carrito para solicitar.');
+      } else {
+          setDateRestrictions();
+          document.getElementById('calendar-popup').style.display = 'block';
+      }
+  }
+  
+  function setDateRestrictions() {
+      const dateInput = document.getElementById('reservation-date');
+      const today = new Date();
+      const minDate = new Date(today);
+      minDate.setDate(minDate.getDate() + 4);  // Bloquea el día actual y los siguientes 3 días
+  
+      const formattedToday = today.toISOString().split('T')[0];
+      const formattedMinDate = minDate.toISOString().split('T')[0];
+  
+      dateInput.setAttribute('min', formattedMinDate);
+  
+      dateInput.addEventListener('input', function() {
+          const selectedDate = new Date(this.value);
+          const day = selectedDate.getDay(); // 0 - Domingo, 1 - Lunes, ..., 6 - Sábado
+  
+          if (day === 0 || selectedDate <= minDate) { // Si es Domingo o es una fecha bloqueada
+              this.setCustomValidity('Fecha no disponible para selección');
+          } else {
+              this.setCustomValidity('');
+          }
+      });
+  }
+  
+  function closePopup() {
+      document.getElementById('calendar-popup').style.display = 'none';
+  }
+  
+  function continueReservation() {
+      var date = document.getElementById('reservation-date').value;
+      var time = document.querySelector('input[name="time"]:checked').value;
+      
+      if (!date || !time) {
+          alert('Por favor, selecciona una fecha y un tiempo.');
+          return;
+      }
+      
+      // Formatear la fecha a dd-mm-yyyy
+      var [year, month, day] = date.split("-");
+      var formattedDate = `${day}-${month}-${year}`;
+      
+      alert(`Reserva solicitada para el ${formattedDate} en la ${time}.`);
+      localStorage.removeItem('cart');
+      renderCart();
+      closePopup();
+  }
+  
+  // Función para obtener la cookie CSRF
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  </script>
+  
+
+  
+  
+
+<style>
+  .calendar-popup {
+      display: none; /* Oculto por defecto */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0); /* Black w/ opacity */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .calendar-popup-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+  }
+  
+  .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+  
+  .close-button:hover,
+  .close-button:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  </style>
+  
 
 {% endblock %}
