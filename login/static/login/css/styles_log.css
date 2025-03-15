@@ -1,62 +1,282 @@
+html, body {
+    overflow: hidden;
+}
 
 body {
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    background: linear-gradient(to right, #662086, #d1198e);
+    margin: 0;
     font-family: "Chau Philomene One", sans-serif;
-    background: linear-gradient(to bottom, rgba(51, 47, 47, 0.5) 0%, rgba(51, 47, 47, 0.5) 100%),
-                url("../assets/img/bg-log-in.jpg");
-    background-size: cover; 
-    background-attachment: fixed; 
-    background-position: center; 
+    transition: margin-left 0.3s ease-in-out;
 }
 
-.login-container {
+.bubble-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 400px;
-    padding: 20px;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Se mantiene en el fondo */
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    animation: float 10s ease-in infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    position: relative;
+    margin-top: -30px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.login-container h2,
+.login-container input,
+.login-container button {
+    font-family: "Chau Philomene One", sans-serif;
+}
+
+.login-logo {
+    width: 1120px;
+    max-width: 80%;
+}
+
+.login-separator {
+    width: 30%;
+    border: none;
+    height: 2.5px;
+    background-color: #fada5e;
+    margin: 2px auto;
+}
+
+.login-container h2 {
+    font-size: 18px;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    border: 3px solid #fada5e;
+    border-radius: 25px;
     box-sizing: border-box;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0.5px;
 }
-.login-box {
-    background-color: #ffffff;
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: #67daea;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 15px 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.login-container button:hover {
+    background: #662086;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.back-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    cursor: pointer;
+    padding-bottom: 3px;
+}
+
+.back-home a {
+    text-decoration: none;
+    color: #662086;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.back-home i {
+    color: #662086;
+    font-size: 15px;
+    transition: color 0.1s ease-in-out;
+}
+
+.back-home:hover i,
+.back-home:hover a {
+    color: #ff69b4;
+}
+
+/* Menú lateral */
+.menu {
+    position: fixed;
+    left: -300px; /* Ajuste aquí */
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background: black;
+    color: white;
     padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out;
+    display: flex; /* Activa flexbox */
+    flex-direction: column; /* Organiza los elementos en columna */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.menu h2 {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.close-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu-item {
+    margin: 20px 0;
+}
+
+
+/* Botón de accesibilidad */
+.inclusivity-btn {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
 }
-h1 {
-    text-align: center;
-    color: #f4623a;
+
+.inclusivity-btn:hover {
+    background: rgba(255, 255, 255, 1);
 }
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
+
+.inclusivity-btn i {
+    font-size: 44px;
+    margin-bottom: 5px;
+    color: #333;
 }
-.form-group {
-    margin-bottom: 15px;
+
+/* Estilos cuando el menú está abierto */
+.menu-open .menu {
+    left: 0;
 }
-@media (max-width: 767px) {
-    body {
-        padding: 10px;
-    }
-    .login-box {
-        padding: 15px;
-    }
+
+.menu-open .login-container {
+    margin-left: 250px;
 }
-@media (min-height: 700px) {
-    body {
-        min-height: 100vh;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+
+.menu-open .inclusivity-btn {
+    left: calc(250px + 20px); /* Ajuste aquí */
+}
+
+@media (max-width: 500px) {
     .login-container {
-        margin-top: 0;
+        max-width: 300px;
+    }
+
+    .menu {
+        width: 200px;
+    }
+
+    .menu-open .login-container {
+        margin-left: 200px;
+    }
+
+    .menu-open .inclusivity-btn {
+        left: calc(200px + 20px); /* Ajuste aquí */
     }
 }
-.email{
-    color: red;
-    display: none;
+
+/* Escala de grises */
+.grayscale {
+    filter: grayscale(100%);
+}
+
+
+.zoom-btn {
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.reload-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+
+.reload-page i {
+    font-size: 32px; /* Aumenta el tamaño del icono */
+    transition: color 0.3s ease-in-out;
+}
+
+.reload-page:hover i {
+    color: #fada5e; /* Amarillo cuando se pasa el cursor */
+}
+
+.reload-page:active i {
+    color: yellow; /* Amarillo al hacer clic */
 }

@@ -1,10 +1,35 @@
 {% extends 'login/base.html' %}
     
 {% block log %}
-    <div class="login-container">
+{% load static %}
+
+    <link rel="stylesheet" href="{% static 'login/css/styles_log.css' %}">
+
+    <div class="menu">
+        <h2>Menú de Accesibilidad</h2>
+        <button class="close-menu" onclick="toggleAccessibility()">&times;</button>
+        <div class="menu-item">
+            <input type="checkbox" id="grayscale-toggle" onclick="toggleGrayscale()">
+            <label for="grayscale-toggle">Escala de grises</label>
+        </div>
+        <div class="menu-item">
+            <p>Aumentar o </br> disminuir tamaño </br> de letra</p>
+            <button class="zoom-btn" onclick="cambiarTamano(-1)">A-</button>
+            <button class="zoom-btn" onclick="cambiarTamano(1)">A+</button>
+        </div>
+        <div class="reload-page" onclick="location.reload();">
+            <p>Restaurar página</p>
+            <i class="fa-solid fa-arrows-rotate"></i>            
+        </div>        
+    </div>
+
+    <div class="bubble-container"></div>
+
+    <div class="login-container" id="login-container">
+        <img src="{% static 'login/assets/img/logosb-removebg-preview.png' %}" alt="Logo" class="login-logo">
+        <hr class="login-separator">
         <div class="login-box">
-            <h1>DIVERTIKIDS</h1>
-            <h2>Inicio de sesión</h2>
+        <h2>Iniciar sesión</h2>
             {% if messages %}
                 <div class="alert alert-danger">
                         {% for message in messages %} <!--esto me muestra que el email ingresado no existe en la bdd -->
@@ -18,8 +43,8 @@
                 {% csrf_token %}
     
                 <div class="form-group">
-                    <label for="id_email">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" >
+                    <!-- <label for="id_email">Correo Electrónico</label> -->
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico">
                     {% if form.email.errors %} <!-- me muestra si hay algun error con el email y si lo hay manda mensaje por pantalla -->
                         <div class="error-message">
                             {% for error in form.email.errors %}
@@ -30,8 +55,8 @@
                 </div>
     
                 <div class="form-group">
-                    <label for="id_password">Contraseña</label>
-                    <input type="password" class="form-control" id="id_password1" name="password">
+                    <!-- <label for="id_password">Contraseña</label> -->
+                    <input type="password" class="form-control" id="id_password1" name="password" placeholder="Contraseña">
                     {% if form.password.errors %} <!-- hace lo mismo que el error de email -->
                         <div class="error-message">
                             {% for error in form.password.errors %}
@@ -41,25 +66,69 @@
                     {% endif %}
                 </div>
     
-                <div class="form-group">
-                    <input type="checkbox" id="mostrar_contrasena" onclick="togglePasswordVisibility()">
-                    <label for="mostrar_contrasena">Mostrar Contraseña</label>
-                </div>
-    
-                <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-    
-                <div class="form-group text-center mt-3">
-                    <a href="{% url 'register' %}">¿No tienes cuenta? Regístrate</a>
-                </div>
-                
-                <div class="form-group text-center mt-3">
-                    <a href="{% url 'password_reset' %}">¿Olvido su contraseña?</a>
-                </div>
-    
-                <div class="form-group text-center">
+                <button type="submit" class="" onclick="login()">INGRESAR</button>
+                <div>
+                    <a href="{% url 'register' %}">Regístrate</a>
+                </div>             
+                <div>
+                    <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+                </div>  
+                <div class="back-home">
+                    <i class="fa-solid fa-circle-left"></i>
                     <a href="{% url 'home' %}">Volver a Home</a>
                 </div>
             </form>
         </div>
+        <div class="inclusivity-btn" onclick="toggleAccessibility()">
+            <i class="fa-solid fa-universal-access"></i>
+            <span>ACCESIBILIDAD</span>
+        </div>
+
     </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (email === "" || password === "") {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            alert("Inicio de sesión exitoso");
+        }
+
+        function toggleAccessibility() {
+            document.body.classList.toggle("menu-open");
+        }
+
+        function toggleGrayscale() {
+            document.documentElement.classList.toggle("grayscale");
+        }
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            let size = Math.random() * 60 + 20 + 'px';
+            bubble.style.width = size;
+            bubble.style.height = size;
+            bubble.style.left = Math.random() * 100 + 'vw';
+            bubble.style.animationDuration = Math.random() * 4 + 5 + 's'; // Más lento
+            document.querySelector('.bubble-container').appendChild(bubble);
+            setTimeout(() => bubble.remove(), 12000);
+        }
+        
+        setInterval(createBubble, 500); // Menos frecuentes
+
+        let tamano = 16; // Tamaño inicial
+
+        function cambiarTamano(cambio) {
+            tamano += cambio;
+
+            document.querySelectorAll("body *:not(.menu *):not(.menu-item *):not(.menu-item label):not(.menu-item p)").forEach(elemento => {
+                elemento.style.fontSize = tamano + "px";
+            });
+        }
+    </script>
 {% endblock %}
